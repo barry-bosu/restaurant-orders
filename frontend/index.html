@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Restaurant Orders | POS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- MENÚ LATERAL -->
+  <aside class="sidebar">
+
+    <div class="brand">
+      <span class="brand-icon">R.</span>
+      <div>
+        <strong>Restaurant</strong>
+        <small>ORDERS POS</small>
+      </div>
+    </div>
+
+    <p class="nav-label">MENÚ PRINCIPAL</p>
+
+    <nav>
+      <a href="#inicio" class="nav-link active">
+        ◫ &nbsp; Inicio
+      </a>
+      <a href="#nuevo-pedido" class="nav-link">
+        ⊕ &nbsp; Nuevo pedido
+      </a>
+      <a href="#pedidos" class="nav-link">
+        ▤ &nbsp; Pedidos registrados
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="status-dot"></span>
+      Sistema Restaurant POS
+      <small>Proyecto Docker · Variante 2</small>
+    </div>
+
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="main">
+
+    <header class="topbar" id="inicio">
+      <div>
+        <span class="eyebrow">PANEL DE CONTROL</span>
+        <h1>Gestión de pedidos</h1>
+        <p>Organiza y consulta los pedidos de tu restaurante.</p>
+      </div>
+      <span class="top-tag">Restaurant POS</span>
+    </header>
+
+    <!-- ESTADÍSTICAS -->
+    <section class="stats">
+
+      <article class="stat-card">
+        <div class="stat-icon">🛒</div>
+        <div class="stat-info">
+          <span>Total de pedidos</span>
+          <strong id="totalOrders">—</strong>
+          <small>Pedidos registrados</small>
+        </div>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-icon">▰</div>
+        <div class="stat-info">
+          <span>Unidades solicitadas</span>
+          <strong id="totalUnits">—</strong>
+          <small>Cantidad acumulada</small>
+        </div>
+      </article>
+
+      <article class="stat-card">
+        <div class="stat-icon">♨</div>
+        <div class="stat-info">
+          <span>Productos diferentes</span>
+          <strong id="totalProducts">—</strong>
+          <small>Según los pedidos</small>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- ÁREA DE TRABAJO -->
+    <section class="workspace">
+
+      <!-- NUEVO PEDIDO -->
+      <div class="panel" id="nuevo-pedido">
+
+        <div class="panel-header">
+          <div>
+            <span class="eyebrow">REGISTRO</span>
+            <h2>Nuevo pedido</h2>
+            <p>Introduce los datos del pedido.</p>
+          </div>
+          <span class="panel-symbol">+</span>
+        </div>
+
+        <form id="orderForm">
+
+          <label for="customer">Nombre del cliente</label>
+          <input
+            id="customer"
+            type="text"
+            placeholder="Ej. Lourdes"
+            maxlength="100"
+            required
+          >
+
+          <label for="product">Producto</label>
+          <input
+            id="product"
+            type="text"
+            placeholder="Ej. Pizza Margarita"
+            maxlength="100"
+            required
+          >
+
+          <label for="quantity">Cantidad</label>
+          <input
+            id="quantity"
+            type="number"
+            min="1"
+            step="1"
+            value="1"
+            required
+          >
+
+          <button
+            type="submit"
+            class="primary-btn"
+            id="submitButton"
+          >
+            + Crear pedido
+          </button>
+
+        </form>
+
+        <p id="message" role="status" aria-live="polite"></p>
+
+      </div>
+
+      <!-- PEDIDOS REGISTRADOS -->
+      <div class="panel orders-panel" id="pedidos">
+
+        <div class="panel-header">
+          <div>
+            <span class="eyebrow">HISTORIAL</span>
+            <h2>Pedidos registrados</h2>
+            <p>Consulta los pedidos almacenados.</p>
+          </div>
+        </div>
+
+        <div class="toolbar">
+
+          <input
+            id="searchOrders"
+            type="search"
+            placeholder="Buscar cliente o producto..."
+          >
+
+          <button
+            id="refreshButton"
+            class="secondary-btn"
+            type="button"
+          >
+            ⟳ Actualizar
+          </button>
+
+        </div>
+
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+              </tr>
+            </thead>
+
+            <tbody id="ordersTable"></tbody>
+          </table>
+        </div>
+
+        <p id="emptyState" class="empty-state" hidden>
+          No hay pedidos para mostrar.
+        </p>
+
+      </div>
+
+    </section>
+
+    <footer>
+      Restaurant Orders POS · Курсовая работа · Вариант 2
+    </footer>
+
+  </main>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>

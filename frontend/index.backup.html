@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Orders</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>Restaurant Orders</h1>
+            <p>Sistema de gestión de pedidos</p>
+        </header>
+
+        <section class="card">
+            <h2>Nuevo pedido</h2>
+
+            <form id="orderForm">
+                <label for="customer">Cliente</label>
+                <input id="customer" type="text"
+                       maxlength="100" required>
+
+                <label for="product">Producto</label>
+                <input id="product" type="text"
+                       maxlength="100" required>
+
+                <label for="quantity">Cantidad</label>
+                <input id="quantity" type="number"
+                       min="1" value="1" required>
+
+                <button type="submit">Crear pedido</button>
+            </form>
+            <p id="message" role="status"></p>
+        </section>
+
+        <section class="card">
+            <h2>Pedidos registrados</h2>
+            <button id="refreshButton" type="button">
+                Actualizar pedidos
+            </button>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTable"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

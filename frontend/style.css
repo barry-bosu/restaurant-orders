@@ -1,0 +1,581 @@
+
+/* ========================================
+   RESTAURANT ORDERS POS
+   VARIANTE 2
+   ======================================== */
+
+:root {
+  --dark: #19212d;
+  --orange: #ff781f;
+  --orange-light: #fff0e3;
+  --text: #19212d;
+  --muted: #687587;
+  --border: #dce2e9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: var(--text);
+  background: var(--dark);
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ========================================
+   MENÚ LATERAL
+   ======================================== */
+
+.sidebar {
+  width: 245px;
+  flex-shrink: 0;
+  background: #19212d;
+  color: white;
+  padding: 30px 18px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  z-index: 2;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 12px 45px;
+}
+
+.brand-icon {
+  background: var(--orange);
+  color: white;
+  padding: 12px;
+  border-radius: 13px;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.brand strong {
+  display: block;
+  font-size: 18px;
+}
+
+.brand small {
+  color: #a9b0be;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.nav-label {
+  color: #8190a4;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  margin: 0 12px 15px;
+}
+
+nav {
+  display: grid;
+  gap: 8px;
+}
+
+.nav-link {
+  display: block;
+  padding: 14px;
+  color: #c1cad6;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: white;
+  background: #303b4b;
+}
+
+.nav-link.active {
+  border-left: 3px solid var(--orange);
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 20px 12px 0;
+  color: #d0d5df;
+  font-size: 12px;
+  border-top: 1px solid #3c4655;
+}
+
+.sidebar-footer small {
+  display: block;
+  margin-top: 8px;
+  color: #a0aabd;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #36c987;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+/* ========================================
+   FONDO DE HAMBURGUESA
+   ======================================== */
+
+.main {
+  flex: 1;
+  min-width: 0;
+  min-height: 100vh;
+  padding: 38px 48px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Fotografía difuminada */
+.main::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+
+  background-image:
+    linear-gradient(
+      rgba(35, 18, 10, 0.20),
+      rgba(35, 18, 10, 0.40)
+    ),
+    url("images/burguer-bg.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  filter: blur(6px);
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Capa de color cálido */
+.main::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(30, 20, 16, 0.35),
+    rgba(135, 65, 20, 0.08)
+  );
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ========================================
+   ENCABEZADO
+   ======================================== */
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.eyebrow {
+  color: var(--orange);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+h1 {
+  font-size: 30px;
+  margin: 8px 0;
+}
+
+h2 {
+  font-size: 21px;
+  margin: 7px 0;
+}
+
+p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.topbar h1,
+.topbar p {
+  color: white;
+  text-shadow: 0 2px 7px rgba(0, 0, 0, 0.55);
+}
+
+.top-tag {
+  background: #fff0e3;
+  color: #df5f0a;
+  padding: 11px 17px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ========================================
+   TARJETAS CON EFECTO CRISTAL
+   ======================================== */
+
+.stat-card,
+.panel {
+  background: rgba(255, 255, 255, 0.87);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 18px;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+/* ========================================
+   ESTADÍSTICAS
+   ======================================== */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  min-height: 125px;
+}
+
+.stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 62px;
+  height: 62px;
+  flex-shrink: 0;
+
+  background: #ffead7;
+  color: var(--orange);
+  border-radius: 50%;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.stat-info {
+  min-width: 0;
+}
+
+.stat-info span {
+  color: #657183;
+  font-size: 13px;
+}
+
+.stat-info strong {
+  display: block;
+  font-size: 34px;
+  margin: 5px 0;
+  color: #172235;
+}
+
+.stat-info small {
+  color: #657183;
+  font-size: 12px;
+}
+
+/* ========================================
+   FORMULARIO Y TABLA
+   ======================================== */
+
+.workspace {
+  display: grid;
+  grid-template-columns:
+    minmax(280px, 0.85fr)
+    minmax(0, 1.5fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.panel {
+  padding: 26px;
+  min-width: 0;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.panel-header p {
+  font-size: 14px;
+  margin-top: 9px;
+}
+
+.panel-symbol {
+  background: #ffe7d3;
+  color: var(--orange);
+  font-size: 30px;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 12px;
+}
+
+/* ========================================
+   CAMPOS
+   ======================================== */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #172235;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+
+  border: 1px solid #d5dce5;
+  border-radius: 10px;
+
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+
+  background: rgba(255, 255, 255, 0.90);
+  margin-bottom: 8px;
+}
+
+input:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(255, 120, 31, 0.18);
+}
+
+/* ========================================
+   BOTONES
+   ======================================== */
+
+button {
+  border: 0;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  filter: brightness(0.95);
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.primary-btn {
+  background: var(--orange);
+  color: white;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.secondary-btn {
+  background: #ffead7;
+  color: #e46b13;
+  white-space: nowrap;
+}
+
+/* ========================================
+   BUSCADOR
+   ======================================== */
+
+.toolbar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.toolbar input {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ========================================
+   TABLA DE PEDIDOS
+   ======================================== */
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 15px 12px;
+  border-bottom: 1px solid #dce2e9;
+}
+
+th {
+  background: rgba(238, 242, 247, 0.9);
+  color: #263447;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+td {
+  color: #19212d;
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.30);
+}
+
+tbody tr:hover {
+  background: rgba(255, 239, 226, 0.80);
+}
+
+td:first-child {
+  color: #f06c13;
+  font-weight: 800;
+}
+
+/* ========================================
+   MENSAJES
+   ======================================== */
+
+#message {
+  min-height: 18px;
+  font-weight: 600;
+}
+
+#message.success {
+  color: #208a57;
+}
+
+#message.error {
+  color: #c73b3b;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 25px;
+}
+
+/* ========================================
+   PIE DE PÁGINA
+   ======================================== */
+
+footer {
+  text-align: center;
+  color: white;
+  font-size: 12px;
+  margin-top: 35px;
+  text-shadow: 0 2px 7px rgba(0, 0, 0, 0.7);
+}
+
+/* ========================================
+   DISEÑO RESPONSIVE
+   ======================================== */
+
+@media (max-width: 1050px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+
+  .app {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    padding: 16px;
+  }
+
+  .brand {
+    padding: 0 0 15px;
+  }
+
+  .nav-label,
+  .sidebar-footer {
+    display: none;
+  }
+
+  nav {
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .nav-link {
+    white-space: nowrap;
+  }
+
+  .main {
+    padding: 22px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .top-tag {
+    display: none;
+  }
+
+  h1 {
+    font-size: 25px;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+
+  .toolbar {
+    flex-wrap: wrap;
+  }
+}

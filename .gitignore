@@ -1,0 +1,27 @@
+# Variables privadas
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Archivos temporales
+*.log
+*.tmp
+
+# Editor
+.vscode/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Copias de seguridad y datos locales
+*.sql
+*.dump
+*.bak
