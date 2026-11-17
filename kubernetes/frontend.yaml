@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: localhost:5000/restaurant-orders-frontend:k8s
+          image: ghcr.io/barry-bosu/restaurant-orders-frontend:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80

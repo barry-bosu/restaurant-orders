@@ -5,7 +5,7 @@ metadata:
   name: backend
   namespace: restaurant-orders
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: backend
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: localhost:5000/restaurant-orders-backend:k8s
+          image: ghcr.io/barry-bosu/restaurant-orders-backend:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
